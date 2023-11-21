@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konduksi Kalor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: left;
+            margin: 50px;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Konduksi Kalor</h1>
+
+    <label for="thermalConductivity">Konduktivitas Termal (W/mK):</label>
+    <input type="number" id="thermalConductivity"  step="0.01">
+
+    <br>
+
+    <label for="area">Luas Penampang (m²):</label>
+    <input type="number" id="area"  step="0.01">
+
+    <br>
+
+    <label for="initialTemperature">T1 (K):</label>
+    <input type="number" id="initialTemperature" >
+
+    <br>
+
+    <label for="finalTemperature">T2 (K):</label>
+    <input type="number" id="finalTemperature" >
+
+    <br>
+
+    <label for="length">Panjang (m):</label>
+    <input type="number" id="length"  step="0.01">
+
+    <br>
+
+    <button onclick="calculateHeatConduction()">Solve</button>
+
+    <h2>Hasil:</h2>
+    <p id="result"></p>
+
+    <script>
+        function calculateHeatConduction() {
+            // Get input values
+            const thermalConductivity = parseFloat(document.getElementById('thermalConductivity').value);
+            const area = parseFloat(document.getElementById('area').value);
+            const initialTemperature = parseFloat(document.getElementById('initialTemperature').value);
+            const finalTemperature = parseFloat(document.getElementById('finalTemperature').value);
+            const length = parseFloat(document.getElementById('length').value);
+
+            // Check if all inputs are provided
+            if (isNaN(thermalConductivity) || isNaN(area) || isNaN(initialTemperature) || isNaN(finalTemperature) || isNaN(length)) {
+                alert("Please enter valid numerical values for all parameters.");
+                return;
+            }
+
+            // Calculate heat conduction
+            const heatConduction = thermalConductivity * area * (finalTemperature - initialTemperature) / length;
+
+            // Display result
+            document.getElementById('result').textContent = `Laju penghantaran kalor secara konduksi adalah: ${heatConduction.toFixed(2)} W`;
+        }
+    </script>
+</body>
+</html>

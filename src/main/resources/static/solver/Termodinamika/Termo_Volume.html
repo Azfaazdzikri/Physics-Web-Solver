@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volume Gas Ideal</title>
+</head>
+<body>
+
+  <h1>Volume Gas Ideal</h1>
+
+  <form id="idealGasForm">
+    <label for="pressure">Tekanan (Pa):</label>
+    <input type="number" id="pressure" required step="any">
+
+    <label for="temperature">Suhu (K):</label>
+    <input type="number" id="temperature" required step="any">
+
+    <label for="molarity">Jumlah mol gas (mol/L):</label>
+    <input type="number" id="molarity" required step="any">
+
+    <button type="button" onclick="calculateVolume()"> Solve </button>
+  </form>
+
+  <p id="result"></p>
+
+  <script>
+    // Ideal gas constant (J/(mol·K))
+    const R = 8.314;
+
+    function calculateVolume() {
+      // Get input values
+      const pressure = parseFloat(document.getElementById('pressure').value);
+      const temperature = parseFloat(document.getElementById('temperature').value);
+      const molarity = parseFloat(document.getElementById('molarity').value);
+
+      // Check if inputs are valid numbers
+      if (isNaN(pressure) || isNaN(temperature) || isNaN(molarity)) {
+        alert('Please enter valid numerical values.');
+        return;
+      }
+
+      // Calculate volume
+      const volume = (molarity * R * temperature) / pressure;
+
+      // Display the result
+      document.getElementById('result').innerText = `Volume gas ideal ini adalah: ${volume.toFixed(2)} L`;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperatur Gas Ideal</title>
+</head>
+<body>
+
+  <h1>Temperatur Gas Ideal</h1>
+
+  <form id="idealGasForm">
+    <label for="pressure">Tekanan (Pa):</label>
+    <input type="number" id="pressure" required step="any">
+
+    <label for="volume">Volume (L):</label>
+    <input type="number" id="volume" required step="any">
+
+    <label for="molarity">Jumlah mol gas (mol/L):</label>
+    <input type="number" id="molarity" required step="any">
+
+    <button type="button" onclick="calculateTemperature()">Solve</button>
+  </form>
+
+  <p id="result"></p>
+
+  <script>
+    // Ideal gas constant (J/(mol·K))
+    const R = 8.314;
+
+    function calculateTemperature() {
+      // Get input values
+      const pressure = parseFloat(document.getElementById('pressure').value);
+      const volume = parseFloat(document.getElementById('volume').value);
+      const molarity = parseFloat(document.getElementById('molarity').value);
+
+      // Check if inputs are valid numbers
+      if (isNaN(pressure) || isNaN(volume) || isNaN(molarity)) {
+        alert('Please enter valid numerical values.');
+        return;
+      }
+
+      // Calculate temperature
+      const temperature = (pressure * volume) / (molarity * R);
+
+      // Display the result
+      document.getElementById('result').innerText = `Temperatur gas ideal ini adalah: ${temperature.toFixed(2)} K`;
+    }
+  </script>
+
+</body>
+</html>

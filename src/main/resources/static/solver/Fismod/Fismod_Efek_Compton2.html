@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menentukan Sudut Hamburan Compton </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: left;
+            margin: 50px;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Menentukan Sudut Hamburan Compton</h1>
+
+    <label for="particleMass">Massa Partkel (kg):</label>
+    <input type="number" id="particleMass"  step="1e-31">
+
+    <br>
+
+    <label for="initialWavelength">Panjang gelombang awal (m):</label>
+    <input type="number" id="initialWavelength"  step="1e-11">
+
+    <br>
+
+    <label for="finalWavelength">Panjang gelombang akhir (m):</label>
+    <input type="number" id="finalWavelength"  step="1e-11">
+
+    <br>
+
+    <button onclick="calculateComptonScatteringAngle()">Solve</button>
+
+    <h2>Hasil:</h2>
+    <p id="result"></p>
+
+    <script>
+        function calculateComptonScatteringAngle() {
+            // Get input values
+             const h = 6.626e-34;  // J·s
+          
+            const c = 3.00e8;      // m/s
+
+            const particleMass = parseFloat(document.getElementById('particleMass').value);
+            const initialWavelength = parseFloat(document.getElementById('initialWavelength').value);
+            const finalWavelength = parseFloat(document.getElementById('finalWavelength').value);
+
+            // Check if all inputs are provided
+            if (isNaN(particleMass) || isNaN(initialWavelength) || isNaN(finalWavelength)) {
+                alert("Please enter valid numerical values for all parameters.");
+                return;
+            }
+
+            // Calculate scattering angle
+            const cosTheta = 1 - ((particleMass * c /h) * (finalWavelength-initialWavelength) );
+
+            // Ensure cosTheta is within valid range [-1, 1]
+            const validCosTheta = Math.max(-1, Math.min(1, cosTheta));
+
+            // Calculate scattering angle in radians
+            const thetaRadians = Math.acos(validCosTheta);
+
+            // Convert radians to degrees
+            const thetaDegrees = (thetaRadians * 180) / Math.PI;
+
+            // Display result
+            document.getElementById('result').textContent = `Sudut Hamburan Partikel ini adalah: ${thetaDegrees.toFixed(2)} derajat`;
+        }
+    </script>
+</body>
+</html>

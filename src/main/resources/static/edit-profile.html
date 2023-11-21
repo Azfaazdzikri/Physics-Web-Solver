@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style-profile.css">
+    <title>Edit Profil Mahasiswa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #edit-profile-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        #save-btn {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div id="edit-profile-container">
+    <h1>Edit Profil Mahasiswa</h1>
+
+    <form action="/update-profile" method="post">
+        <div class="form-group">
+            <label for="namaprofile">Nama:</label>
+            <input type="text" id="namaprofile" name="namaprofile" th:value="${profile.namaprofile}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="nimprofile">NIM:</label>
+            <input type="number" id="nimprofile" name="nimprofile" th:value="${profile.nimprofile}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="tanggallahir">Tanggal Lahir:</label>
+            <input type="text" id="tanggallahir" name="tanggallahir" th:value="${profile.tanggallahir}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="jeniskelamin">Jenis Kelamin:</label>
+            <select id="jeniskelamin" name="jeniskelamin" required>
+                <option value="L" th:selected="${profile.jeniskelamin == 'L'}">Laki-Laki</option>
+                <option value="P" th:selected="${profile.jeniskelamin == 'P'}">Perempuan</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="emailprofile">Email:</label>
+            <input type="text" id="emailprofile" name="emailprofile" th:value="${profile.emailprofile}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="programstudi">Program Studi:</label>
+            <input type="text" id="programstudi" name="programstudi" th:value="${profile.programstudi}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="fakultasprofile">Fakultas:</label>
+            <input type="text" id="fakultasprofile" name="fakultasprofile" th:value="${profile.fakultasprofile}" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="universitas">Universitas:</label>
+            <input type="text" id="universitas" name="universitas" th:value="${profile.universitas}" required/>
+        </div>
+
+        <button type="submit" id="save-btn">Simpan Perubahan</button>
+    </form>
+</div>
+</body>
+</html>

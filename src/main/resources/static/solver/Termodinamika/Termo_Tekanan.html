@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tekanan Gas Ideal</title>
+</head>
+<body>
+
+  <h1>Tekanan Gas Ideal</h1>
+
+  <form id="idealGasForm">
+    <label for="molarity">Jumlah mol gas (mol/L):</label>
+    <input type="number" id="molarity" required step="any">
+
+    <label for="temperature">Suhu (K):</label>
+    <input type="number" id="temperature" required step="any">
+
+    <label for="volume">Volume (L):</label>
+    <input type="number" id="volume" required step="any">
+
+    <button type="button" onclick="calculatePressure()">Solve</button>
+  </form>
+
+  <p id="result"></p>
+
+  <script>
+    // Ideal gas constant (J/(mol·K))
+    const R = 8.314;
+
+    function calculatePressure() {
+      // Get input values
+      const molarity = parseFloat(document.getElementById('molarity').value);
+      const temperature = parseFloat(document.getElementById('temperature').value);
+      const volume = parseFloat(document.getElementById('volume').value);
+
+      // Check if inputs are valid numbers
+      if (isNaN(molarity) || isNaN(temperature) || isNaN(volume)) {
+        alert('Please enter valid numerical values.');
+        return;
+      }
+
+      // Calculate pressure
+      const pressure = (molarity * R * temperature) / volume;
+
+      // Display the result
+      document.getElementById('result').innerText = `Tekanan gas ideal ini adalah: ${pressure.toFixed(2)} Pa`;
+    }
+  </script>
+
+</body>
+</html>

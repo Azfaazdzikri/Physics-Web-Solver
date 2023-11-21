@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energi Kinetik Relativistik</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Energi Kinetik Relativistik</h1>
+
+    <label for="restMass">Massa Diam (kg):</label>
+    <input type="number" id="restMass"  step="1">
+
+    <br>
+
+    <label for="speed">Kecepatan (m/s):</label>
+    <input type="number" id="speed"  step="1">
+
+    <br>
+
+    <button onclick="calculateRelativisticKineticEnergy()">Solve</button>
+
+    <h2>Hasil:</h2>
+    <p id="result"></p>
+
+    <script>
+        function calculateRelativisticKineticEnergy() {
+            // Get input values
+            const restMass = parseFloat(document.getElementById('restMass').value);
+            const speed = parseFloat(document.getElementById('speed').value);
+
+            // Check if all inputs are provided
+            if (isNaN(restMass) || isNaN(speed)) {
+                alert("Please enter valid numerical values for all parameters.");
+                return;
+            }
+
+            // Constants
+            const speedOfLight = 3.00e8;  // m/s
+
+            // Calculate Lorentz factor
+            const gamma = 1 / Math.sqrt(1 - Math.pow(speed / speedOfLight, 2));
+
+            // Calculate relativistic kinetic energy
+            const relativisticKineticEnergy = (gamma - 1) * restMass * Math.pow(speedOfLight, 2);
+
+            // Display result
+            document.getElementById('result').textContent = `Energi kinetik relativistik benda ini adalah : ${relativisticKineticEnergy.toFixed(5)} J`;
+        }
+    </script>
+</body>
+</html>

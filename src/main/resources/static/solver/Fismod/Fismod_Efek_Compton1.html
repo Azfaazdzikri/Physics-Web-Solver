@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perubahan Panjang Gelombang Pada Efek Compton</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: left;
+            margin: 50px;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Perubahan Panjang Gelombang Pada Efek Compton</h1>
+
+    <label for="particleMass">Massa Partikel (kg):</label>
+    <input type="number" id="particleMass"  step="1e-31">
+
+    <br>
+
+    <label for="scatteringAngle">Sudut Hamburan (derajat):</label>
+    <input type="number" id="scatteringAngle"  step="1">
+
+    <br>
+
+    <button onclick="calculateComptonWavelengthChange()">Solve</button>
+
+    <h2>Hasil:</h2>
+    <p id="result"></p>
+
+    <script>
+        function calculateComptonWavelengthChange() {
+            // Get input values
+            const particleMass = parseFloat(document.getElementById('particleMass').value);
+            const scatteringAngle = parseFloat(document.getElementById('scatteringAngle').value);
+
+            // Check if all inputs are provided
+            if (isNaN(particleMass) || isNaN(scatteringAngle)) {
+                alert("Please enter valid numerical values for all parameters.");
+                return;
+            }
+
+            // Constants
+            const planckConstant = 6.626e-34;  // J·s
+            const electronMass = 9.109e-31;   // kg
+            const speedOfLight = 3.00e8;      // m/s
+
+            // Convert angle to radians
+            const thetaRadians = (scatteringAngle * Math.PI) / 180;
+
+            // Calculate wavelength change
+            const wavelengthChange = (planckConstant / (particleMass * speedOfLight)) * (1 - Math.cos(thetaRadians));
+
+            // Display result
+            document.getElementById('result').textContent = `Perubahan panjang gelombangnya adalah: ${wavelengthChange.toExponential(2)} m`;
+        }
+    </script>
+</body>
+</html>

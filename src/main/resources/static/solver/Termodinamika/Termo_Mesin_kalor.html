@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Efisiensi Mesin Kalor</title>
+</head>
+<body>
+
+  <h1>Efisiensi Mesin Kalor</h1>
+
+  <form id="efficiencyForm">
+    <label for="inputHeat">Kalor masukan (Joule):</label>
+    <input type="number" id="inputHeat" required step="any">
+
+    <label for="outputHeat">Kalor keluaran (Joule):</label>
+    <input type="number" id="outputHeat" required step="any">
+
+    <button type="button" onclick="calculateEfficiency()"> Solve </button>
+  </form>
+
+  <p id="result"></p>
+
+  <script>
+    function calculateEfficiency() {
+      // Get input values
+      const inputHeat = parseFloat(document.getElementById('inputHeat').value);
+      const outputHeat = parseFloat(document.getElementById('outputHeat').value);
+
+      // Check if inputs are valid numbers
+      if (isNaN(inputHeat) || isNaN(outputHeat)) {
+        alert('Please enter valid numerical values.');
+        return;
+      }
+
+      // Calculate efficiency
+      const efficiency = (1 - (outputHeat / inputHeat)) * 100;
+
+      // Display the result
+      document.getElementById('result').innerText = `Efisiensi Mesin Kalor ini adalah: ${efficiency.toFixed(2)}%`;
+    }
+  </script>
+
+</body>
+</html>

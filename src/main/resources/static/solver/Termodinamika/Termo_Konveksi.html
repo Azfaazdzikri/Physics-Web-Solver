@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laju Konveksi Kalor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: left;
+            margin: 50px;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Laju Konveksi Kalor</h1>
+
+    <label for="convectionCoefficient">Koefisien Konveksi (W/m²K):</label>
+    <input type="number" id="convectionCoefficient"  step="0.01">
+
+    <br>
+
+    <label for="area">Luas Permukaan (m²):</label>
+    <input type="number" id="area"  step="0.01">
+
+    <br>
+
+    <label for="initialTemperature">T1 (K):</label>
+    <input type="number" id="initialTemperature" >
+
+    <br>
+
+    <label for="finalTemperature">T2 (K):</label>
+    <input type="number" id="finalTemperature" >
+
+    <br>
+
+    <button onclick="calculateHeatConvection()">Solve</button>
+
+    <h2>Hasil:</h2>
+    <p id="result"></p>
+
+    <script>
+        function calculateHeatConvection() {
+            // Get input values
+            const convectionCoefficient = parseFloat(document.getElementById('convectionCoefficient').value);
+            const area = parseFloat(document.getElementById('area').value);
+            const initialTemperature = parseFloat(document.getElementById('initialTemperature').value);
+            const finalTemperature = parseFloat(document.getElementById('finalTemperature').value);
+
+            // Check if all inputs are provided
+            if (isNaN(convectionCoefficient) || isNaN(area) || isNaN(initialTemperature) || isNaN(finalTemperature)) {
+                alert("Please enter valid numerical values for all parameters.");
+                return;
+            }
+
+            // Calculate heat convection
+            const heatConvection = convectionCoefficient * area * (finalTemperature - initialTemperature);
+
+            // Display result
+            document.getElementById('result').textContent = `Laju Konveksi kalor adalah: ${heatConvection.toFixed(2)} W`;
+        }
+    </script>
+</body>
+</html>

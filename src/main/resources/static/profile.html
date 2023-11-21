@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style-profile.css">
+    <title>Profil Mahasiswa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #profile-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .profile-info {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="profile-container">
+    <h1>Profil Mahasiswa</h1>
+
+    <div class="profile-info">
+        <table>
+            <thead>
+                <tr>
+            <th> <i> Nama :</i></th>
+            <th> <i> Nim :</i></th>
+            <th> <i> Tanggal Lahir :</i></th>
+            <th> <i> Jenis Kelamin :</i></th>
+            <th> <i> Email :</i></th>
+            <th> <i> Program Studi :</i></th>
+            <th> <i> Fakultas :</i></th>
+            <th> <i> Universitas :</i></th>
+        </tr>
+        <tr th:each="profile:${profiles}">
+            <td th:text="${profile.namaprofile}"></td>
+            <td th:text="${profile.nimprofile}"></td>
+            <td th:text="${profile.tanggallahir}"></td>
+            <td th:text="${profile.jeniskelamin}"></td>
+            <td th:text="${profile.emailprofile}"></td>
+            <td th:text="${profile.programstudi}"></td>
+            <td th:text="${profile.fakultasprofile}"></td>
+            <td th:text="${profile.universitas}"></td>
+        </tr>
+            </thead>
+        </table>
+    </div>
+
+    <a id="logout-btn" href="/logout">Logout</a>
+    <a id="edit-profile-btn" href="/edit-profile.html">Edit Profil</a>
+</div>
+</body>
+</html>

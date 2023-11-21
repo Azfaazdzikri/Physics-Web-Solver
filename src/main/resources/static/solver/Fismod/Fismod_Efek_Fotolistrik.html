@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menentukan Energi Kinetik Pada efek Fotolistrik </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: left;
+            margin: 50px;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Menentukan Energi Kinetik Pada efek Fotolistrik</h1>
+
+    <label for="wavelength">Panjang gelombang foton (m):</label>
+    <input type="number" id="wavelength"  step="1e-12">
+
+    <br>
+
+    <label for="workFunction">Fungsi kerja (J):</label>
+    <input type="number" id="workFunction"  step="1e-15">
+
+    <br>
+
+    <button onclick="calculateMaxKineticEnergy()">Solve</button>
+
+    <h2>Hasil:</h2>
+    <p id="result"></p>
+
+    <script>
+        function calculateMaxKineticEnergy() {
+            // Get input values
+            const wavelength = parseFloat(document.getElementById('wavelength').value);
+            const workFunction = parseFloat(document.getElementById('workFunction').value);
+
+            // Check if all inputs are provided
+            if (isNaN(wavelength) || isNaN(workFunction)) {
+                alert("Please enter valid numerical values for all parameters.");
+                return;
+            }
+
+            // Constants
+            const planckConstant = 6.626e-34;  // J·s
+            const speedOfLight = 3.00e8;      // m/s
+
+            // Calculate maximum kinetic energy
+            const maxKineticEnergy = (planckConstant * speedOfLight / wavelength) - workFunction;
+            const maxKineticEnergyIneV = maxKineticEnergy / 1.602e-19 
+            // Display result
+            document.getElementById('result').textContent = `Energi kinetik elektron yang terlempar adalah: ${maxKineticEnergyIneV.toFixed(5)} eV`;
+        }
+    </script>
+</body>
+</html>
