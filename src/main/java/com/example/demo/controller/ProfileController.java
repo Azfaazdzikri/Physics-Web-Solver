@@ -6,7 +6,6 @@ import com.example.demo.service.ProfileService;
 import com.example.demo.user.Profile;
 import com.example.demo.user.User;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
+
 
 
 @Controller
@@ -33,46 +30,39 @@ public class ProfileController {
     }
 
 
-    @GetMapping({"/profile", "/profile.html"})
+    @GetMapping({"/profile", "/proflile.html"})
     public String profilePage(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
+        String userEmail = (String) session.getAttribute("userEmail");
 
+        if (userEmail != null) {
+            User user = userRepository.findByEmail(userEmail);
+
+            if (user != null) {
+                Profile profile = user.getProfile();
+                model.addAttribute("profile", profile);
+
+                // Return the appropriate view based on the request path
+                return "/profile.html";
+            }
+        }
+
+        return "redirect:/profile-fail.html";
+    }
+    @GetMapping("/edit-profile")
+    public String editProfile(HttpSession session) {
         Boolean userLoggedIn = (Boolean) session.getAttribute("userLoggedIn");
         if (userLoggedIn != null && userLoggedIn) {
             String userEmail = (String) session.getAttribute("userEmail");
-
-            if (userEmail != null) {
-                User user = userRepository.findByEmail(userEmail);
-
-                if (user != null) {
-                    Profile profile = user.getProfile();
-
-                    if (profile == null) {
-                        profile = new Profile();
-                        profile.setUser(user);
-                    }
-
-                    model.addAttribute("profile", profile);
-
-                    // Check if the request path is /profile or /profile.html
-                    String path = request.getServletPath();
-                    if ("/profile".equals(path)) {
-                        return "redirect:/profile.html";
-                    } else {
-                        // Handle other cases if needed
-                        // e.g., return a different view or perform additional logic
-                        return "profile";
-                    }
-                } else {
-                    return "redirect:/profile-fail.html";
-                }
-            } else {
-                return "redirect:/profile-fail.html";
-            }
+            return "redirect:/edit-profile.html";
         } else {
             return "redirect:/profile-fail.html";
         }
     }
+
+
+
+
 
 
     @PostMapping("/update-profile")
@@ -92,7 +82,7 @@ public class ProfileController {
                 profile.setUser(user);
             }
 
-            // Do not set the id, let Hibernate manage it
+
             profile.setNamaprofile(namaprofile);
             profile.setNimprofile(nimprofile);
             profile.setTanggallahir(tanggallahir);
